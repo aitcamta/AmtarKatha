@@ -7,7 +7,6 @@ import {THEME_COLOR} from './src/utils/Colors';
 import Toast from 'react-native-toast-message';
 import {playSound} from './src/utils/voiceUtils';
 import {SafeAreaView} from 'react-native-safe-area-context';
-
 LogBox.ignoreAllLogs();
 const App = () => {
   useEffect(() => {
