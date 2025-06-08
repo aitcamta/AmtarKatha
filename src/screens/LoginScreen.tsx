@@ -1,5 +1,5 @@
 // screens/LoginScreen.tsx
-import React, {useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -9,6 +9,7 @@ import {
   KeyboardAvoidingView,
   Platform,
   ScrollView,
+  BackHandler,
 } from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootStackParamList} from '../types';
@@ -19,6 +20,7 @@ import {
 } from 'react-native-responsive-dimensions';
 import EncryptedStorage from 'react-native-encrypted-storage';
 import {useGlobalContext} from '../context/Store';
+import RNExitApp from 'react-native-exit-app';
 type LoginScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
   'LoginScreen'
@@ -29,7 +31,8 @@ interface Props {
 }
 
 const LoginScreen: React.FC<Props> = ({navigation}) => {
-  const {USER, setUSER} = useGlobalContext();
+  const {setUSER} = useGlobalContext();
+  const [backPressCount, setBackPressCount] = useState(0);
   const [emailOrMobile, setEmailOrMobile] = useState('');
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState({
@@ -90,7 +93,23 @@ const LoginScreen: React.FC<Props> = ({navigation}) => {
       navigation.navigate('Home');
     }
   };
+  const handleBackPress = useCallback(() => {
+    if (backPressCount === 0) {
+      setBackPressCount(prevCount => prevCount + 1);
+      setTimeout(() => setBackPressCount(0), 2000);
+    } else if (backPressCount === 1) {
+      RNExitApp.exitApp();
+    }
+    return true;
+  }, [backPressCount]);
 
+  useEffect(() => {
+    const backListener = BackHandler.addEventListener(
+      'hardwareBackPress',
+      handleBackPress,
+    );
+    return backListener.remove;
+  }, [handleBackPress]);
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}

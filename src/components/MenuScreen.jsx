@@ -8,8 +8,11 @@ import {
 import {useGlobalContext} from '../context/Store';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {THEME_COLOR} from '../utils/Colors';
 import {useNavigation} from '@react-navigation/native';
+import EncryptedStorage from 'react-native-encrypted-storage';
+import RNExitApp from 'react-native-exit-app';
 export default function MenuScreen() {
   const {USER, activeTab, setActiveTab, setOpenMenu, setAdminTab} =
     useGlobalContext();
@@ -125,6 +128,43 @@ export default function MenuScreen() {
           </TouchableOpacity>
         </View>
       )}
+      <View
+        style={[
+          styles.navItemContainer,
+          {
+            position: 'absolute',
+            bottom: 0,
+            justifyContent: 'space-between',
+            paddingHorizontal: responsiveWidth(4),
+          },
+        ]}>
+        <TouchableOpacity
+          onPress={async () => {
+            await EncryptedStorage.clear();
+            navigation.navigate('LoginScreen');
+            setActiveTab(0);
+            setOpenMenu(false);
+            setAdminTab(0);
+          }}>
+          <MaterialCommunityIcons
+            name="logout"
+            size={responsiveFontSize(2)}
+            color={'red'}>
+            Sign Out
+          </MaterialCommunityIcons>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            RNExitApp.exitApp();
+          }}>
+          <MaterialCommunityIcons
+            name="close-circle"
+            size={responsiveFontSize(2)}
+            color={'red'}>
+            Exit App
+          </MaterialCommunityIcons>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
@@ -132,10 +172,10 @@ export default function MenuScreen() {
 const styles = StyleSheet.create({
   container: {
     width: responsiveWidth(70),
-    height: responsiveHeight(87),
+    height: responsiveHeight(85),
     backgroundColor: 'rgba(0, 102, 255, 0.8)',
     position: 'absolute',
-    top: responsiveHeight(6.5),
+    top: responsiveHeight(7),
     right: 0,
     borderTopLeftRadius: responsiveWidth(3),
     borderBottomLeftRadius: responsiveWidth(3),

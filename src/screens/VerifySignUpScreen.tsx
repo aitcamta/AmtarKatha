@@ -9,7 +9,7 @@ import {
   KeyboardAvoidingView,
   Platform,
   ScrollView,
-  Alert,
+  BackHandler,
 } from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RouteProp} from '@react-navigation/native';
@@ -37,18 +37,26 @@ interface Props {
 
 const VerifySignUpScreen: React.FC<Props> = ({navigation, route}) => {
   const {name, mobile, email, password, village, gp} = route.params;
-  const [mobileOTP, setMobileOTP] = useState<string[]>(['', '', '', '']);
-  const [emailOTP, setEmailOTP] = useState<string[]>(['', '', '', '']);
+  const [mobileOTP, setMobileOTP] = useState<string[]>([
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+  ]);
+  const [emailOTP, setEmailOTP] = useState<string[]>(['', '', '', '', '', '']);
   const [resendTimer, setResendTimer] = useState(60);
   const [isVerifying, setIsVerifying] = useState(false);
   const mobileInputRefs = useRef<Array<TextInput | null>>([]);
   const emailInputRefs = useRef<Array<TextInput | null>>([]);
   const [showAllDetails, setShowAllDetails] = useState(false);
+  const [otpVerified, setOtpVerified] = useState(false);
   // Initialize OTP values
   useEffect(() => {
     // In a real app, you would send OTPs to the user's mobile and email here
-    console.log(`OTP sent to ${mobile}: 1234`);
-    console.log(`OTP sent to ${email}: 5678`);
+    console.log(`OTP sent to ${mobile}: 123456`);
+    console.log(`OTP sent to ${email}: 654321`);
 
     const timer = setInterval(() => {
       setResendTimer(prev => {
@@ -70,7 +78,7 @@ const VerifySignUpScreen: React.FC<Props> = ({navigation, route}) => {
       setMobileOTP(newMobileOTP);
 
       // Auto-focus next input
-      if (value && index < 3 && mobileInputRefs.current[index + 1]) {
+      if (value && index < 5 && mobileInputRefs.current[index + 1]) {
         mobileInputRefs.current[index + 1]?.focus();
       }
     }
@@ -83,7 +91,7 @@ const VerifySignUpScreen: React.FC<Props> = ({navigation, route}) => {
       setEmailOTP(newEmailOTP);
 
       // Auto-focus next input
-      if (value && index < 3 && emailInputRefs.current[index + 1]) {
+      if (value && index < 5 && emailInputRefs.current[index + 1]) {
         emailInputRefs.current[index + 1]?.focus();
       }
     }
@@ -93,8 +101,8 @@ const VerifySignUpScreen: React.FC<Props> = ({navigation, route}) => {
     if (resendTimer === 0) {
       setResendTimer(60);
       // Resend OTPs
-      console.log(`Resending OTP to ${mobile}: 1234`);
-      console.log(`Resending OTP to ${email}: 5678`);
+      console.log(`Resending OTP to ${mobile}: 123456`);
+      console.log(`Resending OTP to ${email}: 654321`);
     }
   };
 
@@ -102,9 +110,9 @@ const VerifySignUpScreen: React.FC<Props> = ({navigation, route}) => {
     const enteredMobileOTP = mobileOTP.join('');
     const enteredEmailOTP = emailOTP.join('');
 
-    if (enteredMobileOTP.length !== 4 || enteredEmailOTP.length !== 4) {
-      Alert.alert(
-        'Error',
+    if (enteredMobileOTP.length !== 6 || enteredEmailOTP.length !== 6) {
+      showToast(
+        'error',
         'Please enter complete OTPs for both mobile and email',
       );
       return;
@@ -117,12 +125,11 @@ const VerifySignUpScreen: React.FC<Props> = ({navigation, route}) => {
       setIsVerifying(false);
 
       // In a real app, you would verify these OTPs with your backend
-      if (enteredMobileOTP === '1234' && enteredEmailOTP === '5678') {
+      if (enteredMobileOTP === '123456' && enteredEmailOTP === '654321') {
         showToast(
           'success',
           'Verification Successful, Your account has been created successfully!',
         );
-
         await handleSignUp();
       } else {
         showToast('error', 'Invalid OTP. Please try again.');
@@ -155,16 +162,38 @@ const VerifySignUpScreen: React.FC<Props> = ({navigation, route}) => {
       showToast('error', 'Failed to create account. Please try again.');
     }
   };
+  const handleBackPress = () => {
+    navigation.navigate('SignUpScreen');
+    return true;
+  };
 
+  useEffect(() => {
+    const backListener = BackHandler.addEventListener(
+      'hardwareBackPress',
+      handleBackPress,
+    );
+    return backListener.remove;
+  }, [handleBackPress]);
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollContainer}>
-        <Text style={styles.title}>Verify Your Account</Text>
-        <Text style={styles.subtitle}>
-          We've sent OTPs to your mobile and email
-        </Text>
+        {!otpVerified ? (
+          <View>
+            <Text style={styles.title}>Verify Your Account</Text>
+            <Text style={styles.subtitle}>
+              We've sent OTPs to your mobile and email
+            </Text>
+          </View>
+        ) : (
+          <View>
+            <Text style={styles.title}>Create Your Account</Text>
+            <Text style={styles.subtitle}>
+              Your OTP is Verified Successfully.
+            </Text>
+          </View>
+        )}
 
         {!showAllDetails ? (
           <View>
@@ -267,9 +296,10 @@ const VerifySignUpScreen: React.FC<Props> = ({navigation, route}) => {
                 isVerifying && styles.verifyingButton,
               ]}
               onPress={() => {
+                setOtpVerified(true);
                 setShowAllDetails(!showAllDetails);
               }}>
-              <Text style={styles.buttonText}>Verify & Create Account</Text>
+              <Text style={styles.buttonText}>Verify Your OTP</Text>
             </TouchableOpacity>
           </View>
         ) : (
@@ -364,8 +394,8 @@ const styles = StyleSheet.create({
     marginTop: hp(1),
   },
   otpInput: {
-    width: wp(15),
-    height: wp(15),
+    width: wp(12),
+    height: wp(12),
     backgroundColor: '#121212',
     color: '#fff',
     borderRadius: wp(2),

@@ -9,6 +9,7 @@ import {
   KeyboardAvoidingView,
   Platform,
   ScrollView,
+  BackHandler,
 } from 'react-native';
 import {Picker} from '@react-native-picker/picker';
 import {StackNavigationProp} from '@react-navigation/stack';
@@ -149,7 +150,18 @@ const SignUpScreen: React.FC<Props> = ({navigation}) => {
       });
     }
   };
+  const handleBackPress = () => {
+    navigation.navigate('LoginScreen');
+    return true;
+  };
 
+  useEffect(() => {
+    const backListener = BackHandler.addEventListener(
+      'hardwareBackPress',
+      handleBackPress,
+    );
+    return backListener.remove;
+  }, [handleBackPress]);
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}

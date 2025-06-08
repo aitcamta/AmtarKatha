@@ -18,9 +18,6 @@ import {useNavigation} from '@react-navigation/native';
 import {
   responsiveHeight,
   responsiveWidth,
-  responsiveFontSize,
-  responsiveScreenHeight,
-  responsiveScreenWidth,
 } from 'react-native-responsive-dimensions';
 import {THEME_COLOR} from '../utils/Colors';
 import AutoHeightImage from '../components/AutoHeightImage';
@@ -79,16 +76,7 @@ const Splash = () => {
       -1,
       true,
     );
-    const chekLogin = async () => {
-      const nonverifieduid = await EncryptedStorage.getItem('nonverifieduid');
-      if (nonverifieduid) {
-        const user = JSON.parse(nonverifieduid);
-        setUSER(user);
-        navigation.navigate('Home');
-      } else {
-        navigation.navigate('LoginScreen');
-      }
-    };
+
     // Complete animation after 5 seconds
     setTimeout(() => {
       setLoader(true);
@@ -121,7 +109,16 @@ const Splash = () => {
       transform: [{scale: starSize.value}],
     };
   });
-
+  const chekLogin = async () => {
+    const nonverifieduid = await EncryptedStorage.getItem('nonverifieduid');
+    if (nonverifieduid) {
+      const user = JSON.parse(nonverifieduid);
+      setUSER(user);
+      navigation.navigate('Home');
+    } else {
+      navigation.navigate('LoginScreen');
+    }
+  };
   return (
     <View
       style={{
@@ -217,7 +214,7 @@ const styles = StyleSheet.create({
   },
   titleContainer: {
     position: 'absolute',
-    top: responsiveScreenHeight(2), // 15% of screen height
+    top: responsiveWidth(2), // 15% of screen height
     alignItems: 'center',
     zIndex: 10,
   },
@@ -264,8 +261,8 @@ const styles = StyleSheet.create({
     marginTop: -responsiveHeight(2),
   },
   flagContainer: {
-    width: responsiveScreenWidth(70), // 70% of screen width
-    height: responsiveScreenHeight(30), // 30% of screen height
+    width: responsiveHeight(70), // 70% of screen width
+    height: responsiveWidth(30), // 30% of screen height
     borderRadius: responsiveWidth(2.78), // Matches 10px on 360px width device
     overflow: 'hidden',
     elevation: 15,
