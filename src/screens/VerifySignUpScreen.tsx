@@ -121,16 +121,16 @@ const VerifySignUpScreen: React.FC<Props> = ({navigation, route}) => {
     setIsVerifying(true);
 
     // Simulate API call
-    setTimeout(async () => {
+    setTimeout(() => {
       setIsVerifying(false);
-
       // In a real app, you would verify these OTPs with your backend
       if (enteredMobileOTP === '123456' && enteredEmailOTP === '654321') {
         showToast(
           'success',
-          'Verification Successful, Your account has been created successfully!',
+          'Your Mobile And Email Verification is Successful!',
         );
-        await handleSignUp();
+        setOtpVerified(true);
+        setShowAllDetails(!showAllDetails);
       } else {
         showToast('error', 'Invalid OTP. Please try again.');
       }
@@ -156,7 +156,7 @@ const VerifySignUpScreen: React.FC<Props> = ({navigation, route}) => {
     try {
       // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 1000));
-      showToast('success', 'Account created successfully!');
+      showToast('success', 'Your account has been created successfully!');
       navigation.navigate('LoginScreen');
     } catch (error) {
       showToast('error', 'Failed to create account. Please try again.');
@@ -295,10 +295,7 @@ const VerifySignUpScreen: React.FC<Props> = ({navigation, route}) => {
                 styles.verifyButton,
                 isVerifying && styles.verifyingButton,
               ]}
-              onPress={() => {
-                setOtpVerified(true);
-                setShowAllDetails(!showAllDetails);
-              }}>
+              onPress={handleVerify}>
               <Text style={styles.buttonText}>Verify Your OTP</Text>
             </TouchableOpacity>
           </View>
@@ -314,7 +311,7 @@ const VerifySignUpScreen: React.FC<Props> = ({navigation, route}) => {
                 styles.verifyButton,
                 isVerifying && styles.verifyingButton,
               ]}
-              onPress={handleVerify}
+              onPress={handleSignUp}
               disabled={isVerifying}>
               {isVerifying ? (
                 <Text style={styles.buttonText}>Verifying...</Text>
