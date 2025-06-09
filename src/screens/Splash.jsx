@@ -5,6 +5,7 @@ import {
   Text,
   Dimensions,
   ImageBackground,
+  Image,
 } from 'react-native';
 import Animated, {
   useSharedValue,
@@ -20,7 +21,6 @@ import {
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
 import {THEME_COLOR} from '../utils/Colors';
-import AutoHeightImage from '../components/AutoHeightImage';
 import Loader from '../components/Loader';
 import EncryptedStorage from 'react-native-encrypted-storage';
 import {useGlobalContext} from '../context/Store';
@@ -160,8 +160,8 @@ const Splash = () => {
         {/* Waving flag animation */}
 
         {/* Use Image component for the GIF */}
-        <AutoHeightImage
-          src={achakraGif}
+        <Image
+          source={achakraGif}
           style={{
             width: chakraSize,
             height: chakraSize,

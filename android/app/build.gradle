@@ -128,6 +128,7 @@ dependencies {
     implementation("com.facebook.react:react-android")
     implementation(platform('com.google.firebase:firebase-bom:33.14.0'))
     implementation project(':react-native-reanimated')
+    implementation 'com.facebook.fresco:animated-gif:3.6.0'
     if (hermesEnabled.toBoolean()) {
         implementation("com.facebook.react:hermes-android")
     } else {
