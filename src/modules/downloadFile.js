@@ -19,9 +19,11 @@ export const downloadFile = async (url, fileName) => {
     .then(res => {
       // the temp file path
       console.log('The file saved to ', res.path());
+      return true;
     })
     .catch(err => {
       console.log(err);
+      return false;
     });
 };
 export const createDownloadLink = async (data, fileName) => {

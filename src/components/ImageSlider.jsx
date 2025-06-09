@@ -18,13 +18,14 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import * as Progress from 'react-native-progress';
 import {downloadFile} from '../modules/downloadFile';
 import {getCollection} from '../context/firestoreHelper';
+import {showToast} from '../modules/Toaster';
 
 const ImageSlider = () => {
   const [sliderData, setSliderData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [fullscreenImage, setFullscreenImage] = useState(null);
-
+  const [fileName, setFileName] = useState('');
   useEffect(() => {
     const fetchSliderImages = async () => {
       try {
@@ -46,7 +47,10 @@ const ImageSlider = () => {
       <View style={styles.slide}>
         <TouchableOpacity
           activeOpacity={0.9}
-          onPress={() => setFullscreenImage(item.original)}>
+          onPress={() => {
+            setFullscreenImage(item.original);
+            setFileName(item.fileName);
+          }}>
           <Image
             source={{uri: item.original}}
             style={styles.image}
@@ -55,7 +59,7 @@ const ImageSlider = () => {
         </TouchableOpacity>
 
         {/* Action buttons */}
-        <View style={styles.actionButtons}>
+        {/* <View style={styles.actionButtons}>
           <TouchableOpacity
             style={[styles.actionButton, styles.downloadButton]}
             onPress={() => downloadFile(item.original, item.fileName)}>
@@ -67,7 +71,7 @@ const ImageSlider = () => {
             onPress={() => setFullscreenImage(item.original)}>
             <Icon name="fullscreen" size={wp(5)} color="white" />
           </TouchableOpacity>
-        </View>
+        </View> */}
 
         {/* Description */}
         {item.description && (
@@ -154,7 +158,18 @@ const ImageSlider = () => {
             onPress={() => setFullscreenImage(null)}>
             <Icon name="close" size={wp(7)} color="white" />
           </TouchableOpacity>
-
+          <TouchableOpacity
+            style={[styles.closeButton, {right: wp(15)}]}
+            onPress={async () => {
+              if (downloadFile(fullscreenImage, fileName)) {
+                showToast('success', 'Image Downloaded Successfullty');
+              } else {
+                showToast('error', 'Failed to Download Image');
+              }
+              setFullscreenImage(null);
+            }}>
+            <Icon name={'file-download'} size={wp(7)} color="white" />
+          </TouchableOpacity>
           <Image
             source={{uri: fullscreenImage}}
             style={styles.fullscreenImage}
