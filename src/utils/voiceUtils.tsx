@@ -4,7 +4,8 @@ export const playSound = (soundName: string) => {
   try {
     const soundPath = getSoundPath(soundName);
     SoundPlayer.playAsset(soundPath);
-    SoundPlayer.setVolume(.2)
+    SoundPlayer.setVolume(0.2);
+    SoundPlayer.setNumberOfLoops(-1);
   } catch (error) {
     console.log(error);
   }

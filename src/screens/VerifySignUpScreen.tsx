@@ -15,8 +15,8 @@ import {StackNavigationProp} from '@react-navigation/stack';
 import {RouteProp} from '@react-navigation/native';
 import {RootStackParamList} from '../types';
 import {
-  responsiveScreenWidth as wp,
-  responsiveScreenHeight as hp,
+  responsiveWidth,
+  responsiveHeight,
 } from 'react-native-responsive-dimensions';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {showToast} from '../modules/Toaster';
@@ -200,7 +200,11 @@ const VerifySignUpScreen: React.FC<Props> = ({navigation, route}) => {
             {/* Mobile Verification */}
             <View style={styles.verificationSection}>
               <View style={styles.sectionHeader}>
-                <Icon name="smartphone" size={hp(3)} color="#6366F1" />
+                <Icon
+                  name="smartphone"
+                  size={responsiveHeight(3)}
+                  color="#6366F1"
+                />
                 <Text style={styles.sectionTitle}>Mobile Verification</Text>
               </View>
               <Text style={styles.sectionSubtitle}>
@@ -239,7 +243,7 @@ const VerifySignUpScreen: React.FC<Props> = ({navigation, route}) => {
             {/* Email Verification */}
             <View style={styles.verificationSection}>
               <View style={styles.sectionHeader}>
-                <Icon name="email" size={hp(3)} color="#6366F1" />
+                <Icon name="email" size={responsiveHeight(3)} color="#6366F1" />
                 <Text style={styles.sectionTitle}>Email Verification</Text>
               </View>
               <Text style={styles.sectionSubtitle}>
@@ -300,7 +304,7 @@ const VerifySignUpScreen: React.FC<Props> = ({navigation, route}) => {
             </TouchableOpacity>
           </View>
         ) : (
-          <View style={{marginTop: hp(3)}}>
+          <View style={{marginTop: responsiveHeight(3)}}>
             <Text style={styles.sectionSubtitle}>Name: {name}</Text>
             <Text style={styles.sectionSubtitle}>Mobile: {mobile}</Text>
             <Text style={styles.sectionSubtitle}>Email: {email}</Text>
@@ -324,7 +328,7 @@ const VerifySignUpScreen: React.FC<Props> = ({navigation, route}) => {
                 styles.verifyButton,
                 {
                   backgroundColor: 'red',
-                  marginTop: hp(2),
+                  marginTop: responsiveHeight(2),
                 },
               ]}
               onPress={() => {
@@ -347,78 +351,78 @@ const styles = StyleSheet.create({
   scrollContainer: {
     flexGrow: 1,
     justifyContent: 'center',
-    padding: wp(5),
+    padding: responsiveWidth(5),
   },
   title: {
-    fontSize: hp(4),
+    fontSize: responsiveHeight(4),
     fontWeight: 'bold',
     color: '#fff',
     textAlign: 'center',
-    marginBottom: hp(1),
+    marginBottom: responsiveHeight(1),
   },
   subtitle: {
-    fontSize: hp(2),
+    fontSize: responsiveHeight(2),
     color: '#999',
     textAlign: 'center',
-    marginBottom: hp(5),
+    marginBottom: responsiveHeight(5),
   },
   verificationSection: {
     backgroundColor: '#1E1E1E',
-    borderRadius: wp(2),
-    padding: wp(4),
-    marginBottom: hp(3),
+    borderRadius: responsiveWidth(2),
+    padding: responsiveWidth(4),
+    marginBottom: responsiveHeight(3),
   },
   sectionHeader: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: hp(1),
+    marginBottom: responsiveHeight(1),
   },
   sectionTitle: {
     color: '#fff',
-    fontSize: hp(2.2),
+    fontSize: responsiveHeight(2.2),
     fontWeight: 'bold',
-    marginLeft: wp(2),
+    marginLeft: responsiveWidth(2),
   },
   sectionSubtitle: {
     color: '#999',
-    fontSize: hp(1.8),
-    marginBottom: hp(2),
+    fontSize: responsiveHeight(1.8),
+    marginBottom: responsiveHeight(2),
     textAlign: 'center',
   },
   otpContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginTop: hp(1),
+    marginTop: responsiveHeight(1),
   },
   otpInput: {
-    width: wp(12),
-    height: wp(12),
+    width: responsiveWidth(12),
+    height: responsiveWidth(12),
     backgroundColor: '#121212',
     color: '#fff',
-    borderRadius: wp(2),
-    fontSize: hp(2.5),
+    borderRadius: responsiveWidth(2),
+    fontSize: responsiveHeight(2.5),
     textAlign: 'center',
     borderWidth: 1,
     borderColor: '#6366F1',
   },
   resendButton: {
     alignSelf: 'center',
-    marginVertical: hp(2),
+    marginVertical: responsiveHeight(2),
   },
   resendText: {
     color: '#6366F1',
     fontWeight: 'bold',
-    fontSize: hp(2),
+    fontSize: responsiveHeight(2),
   },
   disabledText: {
     color: '#4547A9',
   },
   verifyButton: {
     backgroundColor: '#6366F1',
-    borderRadius: wp(2),
-    padding: hp(2),
+    borderRadius: responsiveWidth(2),
+    padding: responsiveHeight(2),
     alignItems: 'center',
-    marginTop: hp(1),
+    marginTop: responsiveHeight(1),
   },
   verifyingButton: {
     backgroundColor: '#4547A9',
@@ -426,7 +430,7 @@ const styles = StyleSheet.create({
   buttonText: {
     color: '#fff',
     fontWeight: 'bold',
-    fontSize: hp(2.2),
+    fontSize: responsiveHeight(2.2),
   },
 });
 

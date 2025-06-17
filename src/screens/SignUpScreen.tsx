@@ -10,13 +10,14 @@ import {
   Platform,
   ScrollView,
   BackHandler,
+  Image,
 } from 'react-native';
 import {Picker} from '@react-native-picker/picker';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootStackParamList} from '../types';
 import {
-  responsiveWidth as wp,
-  responsiveHeight as hp,
+  responsiveWidth,
+  responsiveHeight,
   responsiveFontSize,
 } from 'react-native-responsive-dimensions';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -167,6 +168,14 @@ const SignUpScreen: React.FC<Props> = ({navigation}) => {
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollContainer}>
+        <Image
+          source={require('../assets/images/logo_main.png')}
+          style={{
+            width: responsiveWidth(40),
+            height: responsiveWidth(40),
+            alignSelf: 'center',
+          }}
+        />
         {/* Title */}
         <View style={styles.titleContainer}>
           <Text style={styles.titleMain}>আমতার কথা</Text>
@@ -254,7 +263,7 @@ const SignUpScreen: React.FC<Props> = ({navigation}) => {
               style={styles.eyeIcon}>
               <Icon
                 name={showPassword ? 'visibility' : 'visibility-off'}
-                size={hp(3)}
+                size={responsiveHeight(3)}
                 color="#999"
               />
             </TouchableOpacity>
@@ -310,100 +319,100 @@ const styles = StyleSheet.create({
   scrollContainer: {
     flexGrow: 1,
     justifyContent: 'center',
-    padding: wp(5),
+    padding: responsiveWidth(5),
   },
   title: {
-    fontSize: hp(4),
+    fontSize: responsiveHeight(4),
     fontWeight: 'bold',
     color: '#fff',
-    marginBottom: hp(2),
+    marginBottom: responsiveHeight(2),
     textAlign: 'center',
   },
   titleContainer: {
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: hp(1),
+    marginBottom: responsiveHeight(1),
   },
   titleMain: {
     color: 'white',
     textShadowColor: 'rgba(0, 0, 0, 0.5)',
     textShadowOffset: {
-      width: wp(0.3),
-      height: hp(0.15),
+      width: responsiveWidth(0.3),
+      height: responsiveHeight(0.15),
     },
-    textShadowRadius: wp(1),
+    textShadowRadius: responsiveWidth(1),
     letterSpacing: 1,
     fontFamily: 'arafat',
     fontSize: responsiveFontSize(5),
     textAlign: 'center',
   },
   inputContainer: {
-    marginBottom: hp(2),
+    marginBottom: responsiveHeight(2),
   },
   pickerContainer: {
     backgroundColor: '#1E1E1E',
-    borderRadius: wp(2),
+    borderRadius: responsiveWidth(2),
     overflow: 'hidden',
   },
   input: {
     backgroundColor: '#1E1E1E',
     color: '#fff',
-    borderRadius: wp(2),
-    padding: wp(4),
-    fontSize: hp(2),
+    borderRadius: responsiveWidth(2),
+    padding: responsiveWidth(4),
+    fontSize: responsiveHeight(2),
   },
   passwordContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: '#1E1E1E',
-    borderRadius: wp(2),
+    borderRadius: responsiveWidth(2),
   },
   passwordInput: {
     flex: 1,
     color: '#fff',
-    padding: wp(4),
-    fontSize: hp(2),
+    padding: responsiveWidth(4),
+    fontSize: responsiveHeight(2),
   },
   eyeIcon: {
-    padding: wp(3),
+    padding: responsiveWidth(3),
   },
   picker: {
     color: '#fff',
-    height: hp(6),
+    height: responsiveHeight(6),
     backgroundColor: '#1E1E1E',
-    borderRadius: wp(2),
+    borderRadius: responsiveWidth(2),
   },
   error: {
     color: '#FF5252',
-    marginTop: hp(0.5),
-    fontSize: hp(1.8),
+    marginTop: responsiveHeight(0.5),
+    fontSize: responsiveHeight(1.8),
   },
   success: {
     color: '#4CAF50',
-    marginTop: hp(0.5),
-    fontSize: hp(1.8),
+    marginTop: responsiveHeight(0.5),
+    fontSize: responsiveHeight(1.8),
   },
   signUpButton: {
     backgroundColor: '#6366F1',
-    borderRadius: wp(2),
-    padding: hp(2),
+    borderRadius: responsiveWidth(2),
+    padding: responsiveHeight(2),
     alignItems: 'center',
-    marginTop: hp(1),
+    marginTop: responsiveHeight(1),
   },
   buttonText: {
     color: '#fff',
     fontWeight: 'bold',
-    fontSize: hp(2.2),
+    fontSize: responsiveHeight(2.2),
   },
   loginButton: {
-    marginTop: hp(2),
-    padding: hp(1.5),
+    marginTop: responsiveHeight(2),
+    padding: responsiveHeight(1.5),
     alignItems: 'center',
   },
   loginButtonText: {
     color: '#6366F1',
     fontWeight: 'bold',
-    fontSize: hp(2),
+    fontSize: responsiveHeight(2),
   },
 });
 

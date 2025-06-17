@@ -10,6 +10,7 @@ import {
   Platform,
   ScrollView,
   BackHandler,
+  Image,
 } from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootStackParamList} from '../types';
@@ -17,6 +18,8 @@ import {
   responsiveWidth as wp,
   responsiveHeight as hp,
   responsiveFontSize,
+  responsiveWidth,
+  responsiveHeight,
 } from 'react-native-responsive-dimensions';
 import EncryptedStorage from 'react-native-encrypted-storage';
 import {useGlobalContext} from '../context/Store';
@@ -115,6 +118,14 @@ const LoginScreen: React.FC<Props> = ({navigation}) => {
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollContainer}>
+        <Image
+          source={require('../assets/images/logo_main.png')}
+          style={{
+            width: responsiveWidth(40),
+            height: responsiveWidth(40),
+            alignSelf: 'center',
+          }}
+        />
         {/* Title */}
         <View style={styles.titleContainer}>
           <Text style={styles.titleMain}>আমতার কথা</Text>

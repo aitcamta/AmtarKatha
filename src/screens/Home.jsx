@@ -46,6 +46,8 @@ export default function Home() {
             transparent
             onBackdropPress={() => setOpenMenu(false)}
             onBackButtonPress={() => setOpenMenu(false)}
+            onSwipeCancel={() => setOpenMenu(false)}
+            onSwipeStart={() => setOpenMenu(true)}
             animationIn={'slideInLeft'}
             animationOut={'slideOutRight'}
             animationInTiming={500}

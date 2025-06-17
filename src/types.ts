@@ -4,7 +4,6 @@ export type RootStackParamList = {
   SignUpScreen: undefined;
   Splash: undefined;
   Home: undefined;
-  SignOut: undefined;
   VerifySignUpScreen: {
     name: string;
     mobile: string;

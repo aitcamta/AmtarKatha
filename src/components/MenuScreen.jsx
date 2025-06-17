@@ -1,29 +1,36 @@
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   responsiveFontSize,
   responsiveHeight,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
 import {useGlobalContext} from '../context/Store';
+import Entypo from 'react-native-vector-icons/FontAwesome5';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {THEME_COLOR} from '../utils/Colors';
 import {useNavigation} from '@react-navigation/native';
 import EncryptedStorage from 'react-native-encrypted-storage';
 import RNExitApp from 'react-native-exit-app';
+import {socialMedia} from '../utils/Constants';
+import {Linking} from 'react-native';
+import SoundPlayer from 'react-native-sound-player';
 export default function MenuScreen() {
   const {USER, activeTab, setActiveTab, setOpenMenu, setAdminTab} =
     useGlobalContext();
   const isAdmin = USER.isAdmin;
   const navigation = useNavigation();
+  const [isPlaying, setIsPlaying] = useState(true);
   const handlePress = tab => {
     setActiveTab(tab);
     navigation.navigate('Home');
     setOpenMenu(false);
     setAdminTab(0);
   };
+
   return (
     <View style={styles.container}>
       <TouchableOpacity
@@ -52,7 +59,7 @@ export default function MenuScreen() {
         }}
         style={styles.navItemContainer}>
         <Image
-          source={require('../assets/images/bblogo.png')}
+          source={require('../assets/images/logo.png')}
           style={styles.menuImage}
         />
         <Text
@@ -111,10 +118,9 @@ export default function MenuScreen() {
               handlePress(20);
             }}
             style={styles.navItemContainer}>
-            <FontAwesome5
-              name="user-secret"
-              size={30}
-              color={activeTab === 20 ? 'purple' : THEME_COLOR}
+            <Image
+              source={require('../assets/images/outsourcing.png')}
+              style={[styles.menuImage, {tintColor: THEME_COLOR}]}
             />
             <Text
               style={[
@@ -128,6 +134,34 @@ export default function MenuScreen() {
           </TouchableOpacity>
         </View>
       )}
+      <View
+        style={[
+          styles.navItemContainer,
+          {
+            position: 'absolute',
+            bottom: responsiveHeight(5.25),
+            justifyContent: 'space-around',
+            paddingHorizontal: responsiveWidth(2),
+          },
+        ]}>
+        {socialMedia.map((item, index) => (
+          <TouchableOpacity
+            onPress={async () => {
+              await Linking.openURL(item.link);
+            }}
+            key={index}>
+            <Entypo
+              name={item.platform}
+              size={responsiveFontSize(3)}
+              color={'blue'}
+            />
+            <Text
+              style={{fontSize: responsiveFontSize(1), alignSelf: 'center'}}>
+              {item.linkType}
+            </Text>
+          </TouchableOpacity>
+        ))}
+      </View>
       <View
         style={[
           styles.navItemContainer,
@@ -153,6 +187,57 @@ export default function MenuScreen() {
             Sign Out
           </MaterialCommunityIcons>
         </TouchableOpacity>
+        {isPlaying ? (
+          <TouchableOpacity
+            onPress={async () => {
+              SoundPlayer.pause();
+              setIsPlaying(false);
+            }}
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}>
+            <Ionicons
+              name="volume-mute"
+              size={responsiveFontSize(3)}
+              color={'red'}
+            />
+            <Text
+              style={{
+                fontSize: responsiveFontSize(1),
+                alignSelf: 'center',
+                color: 'red',
+              }}>
+              Pause
+            </Text>
+          </TouchableOpacity>
+        ) : (
+          <TouchableOpacity
+            onPress={async () => {
+              SoundPlayer.play();
+              setIsPlaying(true);
+            }}
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}>
+            <Ionicons
+              name="volume-high-sharp"
+              size={responsiveFontSize(3)}
+              color={'green'}
+            />
+            <Text
+              style={{
+                fontSize: responsiveFontSize(1),
+                alignSelf: 'center',
+                color: 'green',
+              }}>
+              Play
+            </Text>
+          </TouchableOpacity>
+        )}
         <TouchableOpacity
           onPress={() => {
             RNExitApp.exitApp();
@@ -217,8 +302,8 @@ const styles = StyleSheet.create({
     paddingLeft: responsiveWidth(2),
   },
   menuImage: {
-    width: responsiveWidth(8.5),
-    height: responsiveWidth(8.5),
+    width: responsiveWidth(9),
+    height: responsiveWidth(9),
     resizeMode: 'contain',
   },
 });

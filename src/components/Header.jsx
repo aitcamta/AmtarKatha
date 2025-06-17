@@ -21,7 +21,7 @@ export default function Header() {
           navigation.navigate('Home');
         }}>
         <Image
-          source={require('../assets/images/sphalf.png')}
+          source={require('../assets/images/logo_main.png')}
           style={styles.iconImage}
           resizeMode="contain"
         />
@@ -53,7 +53,7 @@ export default function Header() {
 const styles = StyleSheet.create({
   headerContainer: {
     width: '100%',
-    height: 50,
+    height: responsiveHeight(6),
     backgroundColor: 'navy',
     flexDirection: 'row',
     alignItems: 'center',

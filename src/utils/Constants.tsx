@@ -1,5 +1,5 @@
 import {Dimensions, Platform} from 'react-native';
-
+export const appVersion = 0.1;
 export const isBase64 = (str: string) => {
   const base64Regex =
     /^(?:[A-Za-z0-9+\/]{4})*(?:[A-Za-z0-9+\/]{2}==|[A-Za-z0-9+\/]{3}=)?$/;
@@ -469,5 +469,25 @@ export const DevlopmentCateories = [
     id: 'i10',
     cat: 'যাত্রী প্রতীক্ষালয়',
     tab: 'dev-i10',
+  },
+];
+export const socialMedia = [
+  {
+    id: 'sm1',
+    platform: 'facebook',
+    link: 'https://www.facebook.com/sukantapaulofficial',
+    linkType: 'Page',
+  },
+  {
+    id: 'sm1',
+    platform: 'facebook',
+    link: 'https://www.facebook.com/sukanta.k.paul.9',
+    linkType: 'Profile',
+  },
+  {
+    id: 'sm3',
+    platform: 'twitter',
+    link: 'https://x.com/SukantaPaulAITC',
+    linkType: 'Page',
   },
 ];

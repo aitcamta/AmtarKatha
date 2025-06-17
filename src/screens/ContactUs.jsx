@@ -15,11 +15,6 @@ import {
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
 import {useGlobalContext} from '../context/Store';
-import {
-  responsiveWidth as wp,
-  responsiveHeight as hp,
-  responsiveFontSize as fp,
-} from 'react-native-responsive-dimensions';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import DocumentPicker from '@react-native-documents/picker';
 import {launchImageLibrary} from 'react-native-image-picker';
@@ -244,7 +239,7 @@ export default function ContactUs() {
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <Image
-        source={require('../assets/images/spaul2025.png')}
+        source={require('../assets/images/spgreen2_new_nama.png')}
         style={styles.image}
       />
       <Text style={styles.title}>সরাসরি বিধায়ক</Text>
@@ -275,7 +270,11 @@ export default function ContactUs() {
           <ScrollView contentContainerStyle={styles.formContainer}>
             {submittedId ? (
               <View style={styles.successContainer}>
-                <Icon name="check-circle" size={wp(20)} color="#4CAF50" />
+                <Icon
+                  name="check-circle"
+                  size={responsiveWidth(20)}
+                  color="#4CAF50"
+                />
                 <Text style={styles.successText}>
                   Request Submitted Successfully!
                 </Text>
@@ -295,7 +294,11 @@ export default function ContactUs() {
                         'Copied!, Request ID copied to clipboard',
                       );
                     }}>
-                    <Icon name="content-copy" size={wp(6)} color="#BB86FC" />
+                    <Icon
+                      name="content-copy"
+                      size={responsiveWidth(6)}
+                      color="#BB86FC"
+                    />
                   </TouchableOpacity>
                 </View>
 
@@ -309,7 +312,7 @@ export default function ContactUs() {
               <View style={styles.otpContainer}>
                 <Icon
                   name={otpStep === 'email' ? 'email' : 'phone'}
-                  size={wp(20)}
+                  size={responsiveWidth(20)}
                   color="#BB86FC"
                 />
                 <Text style={styles.otpTitle}>
@@ -425,7 +428,11 @@ export default function ContactUs() {
                     <Text style={styles.imageButtonText}>Uploading...</Text>
                   ) : (
                     <>
-                      <Icon name="add-a-photo" size={wp(5)} color="#FFF" />
+                      <Icon
+                        name="add-a-photo"
+                        size={responsiveWidth(5)}
+                        color="#FFF"
+                      />
                       <Text style={styles.imageButtonText}>
                         {formData.image
                           ? 'Change Image'
@@ -445,7 +452,11 @@ export default function ContactUs() {
                     <TouchableOpacity
                       style={styles.removeImageButton}
                       onPress={() => setFormData({...formData, image: null})}>
-                      <Icon name="close" size={wp(4)} color="#FFF" />
+                      <Icon
+                        name="close"
+                        size={responsiveWidth(4)}
+                        color="#FFF"
+                      />
                     </TouchableOpacity>
                   </View>
                 )}
@@ -580,7 +591,7 @@ const styles = StyleSheet.create({
   },
   image: {
     width: responsiveWidth(60),
-    height: responsiveWidth(45),
+    height: responsiveWidth(60),
     marginBottom: responsiveWidth(2),
     alignSelf: 'center',
     resizeMode: 'cover',
@@ -588,45 +599,45 @@ const styles = StyleSheet.create({
   tabContainer: {
     flexDirection: 'row',
     backgroundColor: '#1F1F1F',
-    borderRadius: wp(2),
-    marginBottom: hp(2),
+    borderRadius: responsiveWidth(2),
+    marginBottom: responsiveHeight(2),
     overflow: 'hidden',
   },
   tabButton: {
     flex: 1,
-    paddingVertical: hp(1.5),
+    paddingVertical: responsiveHeight(1.5),
     alignItems: 'center',
   },
   formTab: {
     backgroundColor: '#BB86FC',
-    borderRadius: wp(2),
+    borderRadius: responsiveWidth(2),
   },
   tabText: {
     color: '#FFF',
-    fontSize: fp(2),
+    fontSize: responsiveFontSize(2),
     fontWeight: 'bold',
   },
   formContainer: {
-    paddingBottom: hp(4),
+    paddingBottom: responsiveHeight(4),
   },
   sectionTitle: {
     color: '#FFF',
-    fontSize: fp(2.5),
+    fontSize: responsiveFontSize(2.5),
     fontWeight: 'bold',
-    marginBottom: hp(2),
-    marginTop: hp(1),
+    marginBottom: responsiveHeight(2),
+    marginTop: responsiveHeight(1),
     alignSelf: 'center',
   },
   input: {
     backgroundColor: '#1F1F1F',
     color: '#FFF',
-    borderRadius: wp(2),
-    padding: wp(4),
-    marginBottom: hp(1),
-    fontSize: fp(2),
+    borderRadius: responsiveWidth(2),
+    padding: responsiveWidth(4),
+    marginBottom: responsiveHeight(1),
+    fontSize: responsiveFontSize(2),
   },
   messageInput: {
-    minHeight: hp(15),
+    minHeight: responsiveHeight(15),
     textAlignVertical: 'top',
   },
   errorInput: {
@@ -635,116 +646,116 @@ const styles = StyleSheet.create({
   },
   errorText: {
     color: '#CF6679',
-    marginBottom: hp(1),
-    fontSize: fp(1.8),
+    marginBottom: responsiveHeight(1),
+    fontSize: responsiveFontSize(1.8),
   },
   imageButton: {
     flexDirection: 'row',
     backgroundColor: '#3700B3',
-    padding: wp(4),
-    borderRadius: wp(2),
+    padding: responsiveWidth(4),
+    borderRadius: responsiveWidth(2),
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: hp(2),
+    marginBottom: responsiveHeight(2),
   },
   imageButtonText: {
     color: '#FFF',
-    marginLeft: wp(2),
-    fontSize: fp(2),
+    marginLeft: responsiveWidth(2),
+    fontSize: responsiveFontSize(2),
   },
   imagePreview: {
-    marginBottom: hp(2),
+    marginBottom: responsiveHeight(2),
     position: 'relative',
     alignItems: 'center',
   },
   previewImage: {
-    width: wp(60),
-    height: wp(60),
-    borderRadius: wp(2),
+    width: responsiveWidth(60),
+    height: responsiveWidth(60),
+    borderRadius: responsiveWidth(2),
     borderWidth: 1,
     borderColor: '#333',
   },
   removeImageButton: {
     position: 'absolute',
-    top: wp(1),
-    right: wp(1),
+    top: responsiveWidth(1),
+    right: responsiveWidth(1),
     backgroundColor: '#CF6679',
-    borderRadius: wp(3),
-    width: wp(6),
-    height: wp(6),
+    borderRadius: responsiveWidth(3),
+    width: responsiveWidth(6),
+    height: responsiveWidth(6),
     justifyContent: 'center',
     alignItems: 'center',
   },
   button: {
     backgroundColor: '#BB86FC',
-    padding: wp(4),
-    borderRadius: wp(2),
+    padding: responsiveWidth(4),
+    borderRadius: responsiveWidth(2),
     alignItems: 'center',
   },
   buttonText: {
     color: '#000',
     fontWeight: 'bold',
-    fontSize: fp(2.2),
+    fontSize: responsiveFontSize(2.2),
   },
   cancelButton: {
-    padding: wp(4),
+    padding: responsiveWidth(4),
     alignItems: 'center',
-    marginTop: hp(1),
+    marginTop: responsiveHeight(1),
   },
   cancelText: {
     color: '#BB86FC',
-    fontSize: fp(2),
+    fontSize: responsiveFontSize(2),
   },
   otpContainer: {
     alignItems: 'center',
-    padding: wp(5),
+    padding: responsiveWidth(5),
   },
   otpTitle: {
     color: '#FFF',
-    fontSize: fp(3),
+    fontSize: responsiveFontSize(3),
     fontWeight: 'bold',
-    marginVertical: hp(1),
+    marginVertical: responsiveHeight(1),
   },
   otpText: {
     color: '#E0E0E0',
-    fontSize: fp(2),
-    marginBottom: hp(3),
+    fontSize: responsiveFontSize(2),
+    marginBottom: responsiveHeight(3),
     textAlign: 'center',
   },
   successContainer: {
     alignItems: 'center',
-    padding: wp(5),
+    padding: responsiveWidth(5),
   },
   successText: {
     color: '#FFF',
-    fontSize: fp(3),
+    fontSize: responsiveFontSize(3),
     fontWeight: 'bold',
-    marginVertical: hp(2),
+    marginVertical: responsiveHeight(2),
     textAlign: 'center',
   },
   infoText: {
     color: '#E0E0E0',
-    fontSize: fp(2.2),
-    marginBottom: hp(3),
+    fontSize: responsiveFontSize(2.2),
+    marginBottom: responsiveHeight(3),
     textAlign: 'center',
   },
   docIdContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: '#1F1F1F',
-    padding: wp(4),
-    borderRadius: wp(2),
-    marginBottom: hp(3),
+    padding: responsiveWidth(4),
+    borderRadius: responsiveWidth(2),
+    marginBottom: responsiveHeight(3),
   },
   docIdText: {
     color: '#BB86FC',
-    fontSize: fp(2),
-    marginRight: wp(3),
+    fontSize: responsiveFontSize(2),
+    marginRight: responsiveWidth(3),
   },
   newRequestButton: {
     backgroundColor: '#3700B3',
-    padding: wp(4),
-    borderRadius: wp(2),
+    padding: responsiveWidth(4),
+    borderRadius: responsiveWidth(2),
     width: '100%',
     alignItems: 'center',
   },
@@ -753,40 +764,40 @@ const styles = StyleSheet.create({
   },
   resultContainer: {
     backgroundColor: '#1F1F1F',
-    borderRadius: wp(2),
-    padding: wp(4),
-    marginTop: hp(3),
+    borderRadius: responsiveWidth(2),
+    padding: responsiveWidth(4),
+    marginTop: responsiveHeight(3),
   },
   resultTitle: {
     color: '#BB86FC',
-    fontSize: fp(2.5),
+    fontSize: responsiveFontSize(2.5),
     fontWeight: 'bold',
-    marginBottom: hp(2),
+    marginBottom: responsiveHeight(2),
     borderBottomWidth: 1,
     borderBottomColor: '#333',
-    paddingBottom: hp(1),
+    paddingBottom: responsiveHeight(1),
   },
   detailRow: {
-    marginBottom: hp(1.5),
+    marginBottom: responsiveHeight(1.5),
   },
   detailLabel: {
     color: '#BB86FC',
-    fontSize: fp(2),
-    marginBottom: hp(0.5),
+    fontSize: responsiveFontSize(2),
+    marginBottom: responsiveHeight(0.5),
   },
   detailValue: {
     color: '#FFF',
-    fontSize: fp(2),
-    marginBottom: hp(1),
+    fontSize: responsiveFontSize(2),
+    marginBottom: responsiveHeight(1),
   },
   statusContainer: {
     backgroundColor: '#333',
-    borderRadius: wp(1),
-    padding: wp(1),
+    borderRadius: responsiveWidth(1),
+    padding: responsiveWidth(1),
     alignSelf: 'flex-start',
   },
   statusText: {
-    fontSize: fp(1.8),
+    fontSize: responsiveFontSize(1.8),
     fontWeight: 'bold',
   },
   progress: {
@@ -796,14 +807,14 @@ const styles = StyleSheet.create({
     color: '#4CAF50',
   },
   resultImage: {
-    width: wp(40),
-    height: wp(40),
-    borderRadius: wp(1),
-    marginTop: hp(1),
+    width: responsiveWidth(40),
+    height: responsiveWidth(40),
+    borderRadius: responsiveWidth(1),
+    marginTop: responsiveHeight(1),
   },
   replyText: {
     backgroundColor: '#333',
-    padding: wp(2),
-    borderRadius: wp(1),
+    padding: responsiveWidth(2),
+    borderRadius: responsiveWidth(1),
   },
 });

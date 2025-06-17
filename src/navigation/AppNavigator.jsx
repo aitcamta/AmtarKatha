@@ -3,7 +3,6 @@ import {createStackNavigator} from '@react-navigation/stack';
 import Splash from '../screens/Splash';
 import Home from '../screens/Home';
 import LoginScreen from '../screens/LoginScreen';
-import SignOut from '../screens/SignOut';
 import VerifySignUpScreen from '../screens/VerifySignUpScreen';
 import {navigationRef} from '../utils/NavigationUtil';
 import SignUpScreen from '../screens/SignUpScreen';
@@ -44,15 +43,6 @@ function AppNavigator() {
         <Stack.Screen
           name="SignUpScreen"
           component={SignUpScreen}
-          options={{
-            headerShown: false,
-            drawerItemStyle: {height: 0},
-            animation: 'reveal_from_bottom',
-          }}
-        />
-        <Stack.Screen
-          name="SignOut"
-          component={SignOut}
           options={{
             headerShown: false,
             drawerItemStyle: {height: 0},
