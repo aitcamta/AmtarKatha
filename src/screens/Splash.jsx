@@ -26,7 +26,7 @@ import EncryptedStorage from 'react-native-encrypted-storage';
 import {useGlobalContext} from '../context/Store';
 // Import your GIF file (adjust the path as needed)
 const achakraGif = require('../assets/images/achakra.gif');
-const SpaulImage = require('../assets/images/spblue.png');
+const SpaulImage = require('../assets/images/spblue_new_nama.png');
 
 const Splash = () => {
   const {setUSER} = useGlobalContext();
@@ -49,7 +49,7 @@ const Splash = () => {
     // Main animation sequence
     opacity.value = withTiming(1, {duration: 500});
     bgImage.value = withTiming(1, {duration: 500});
-    spImage.value = withTiming(1, {duration: 800});
+    spImage.value = withTiming(1, {duration: 1200});
     starOpacity.value = withRepeat(
       withSequence(
         withTiming(1, {duration: 500, easing: Easing.inOut(Easing.ease)}),
@@ -79,11 +79,11 @@ const Splash = () => {
 
     // Complete animation after 5 seconds
     setTimeout(() => {
-      setLoader(true);
+      // setLoader(true);
       setTimeout(() => {
         chekLogin();
-      }, 2000);
-    }, 3000);
+      }, 3000);
+    }, 4000);
   }, []);
 
   // Title animation style
@@ -165,17 +165,17 @@ const Splash = () => {
           style={{
             width: chakraSize,
             height: chakraSize,
-            // marginTop: responsiveHeight(2),
+            marginTop: -responsiveHeight(8),
           }}
         />
         <Animated.Image
           source={SpaulImage}
           style={[
             {
-              width: responsiveWidth(120),
+              width: responsiveWidth(200),
               position: 'absolute',
-              bottom: -responsiveHeight(19),
-              transform: [{scale: 0.9}],
+              bottom: -responsiveHeight(23),
+              transform: [{scale: 0.5}],
             },
             spStyle,
           ]}

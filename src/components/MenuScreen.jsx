@@ -18,6 +18,7 @@ import RNExitApp from 'react-native-exit-app';
 import {socialMedia} from '../utils/Constants';
 import {Linking} from 'react-native';
 import SoundPlayer from 'react-native-sound-player';
+import AutoHeightImage from './AutoHeightImage';
 export default function MenuScreen() {
   const {USER, activeTab, setActiveTab, setOpenMenu, setAdminTab} =
     useGlobalContext();
@@ -142,6 +143,7 @@ export default function MenuScreen() {
             bottom: responsiveHeight(5.25),
             justifyContent: 'space-around',
             paddingHorizontal: responsiveWidth(2),
+            zIndex: 5,
           },
         ]}>
         {socialMedia.map((item, index) => (
@@ -249,6 +251,17 @@ export default function MenuScreen() {
             Exit App
           </MaterialCommunityIcons>
         </TouchableOpacity>
+        <AutoHeightImage
+          src={require('../assets/images/spblue_full_new_bibek.png')}
+          style={{
+            position: 'absolute',
+            width: responsiveWidth(50),
+            right: responsiveWidth(10),
+            bottom: responsiveHeight(11),
+            opacity: 0.8,
+            zIndex: 1,
+          }}
+        />
       </View>
     </View>
   );

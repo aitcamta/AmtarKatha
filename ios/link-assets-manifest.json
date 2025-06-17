@@ -16,6 +16,10 @@
     {
       "path": "src/assets/fonts/times.ttf",
       "sha1": "2fd7802771ae710a66b221338130855252ce74f7"
+    },
+    {
+      "path": "src/assets/fonts/timesbd.ttf",
+      "sha1": "12eaecaabfbaa5d5e4af58414d11aa83d7dfb9d4"
     }
   ]
 }

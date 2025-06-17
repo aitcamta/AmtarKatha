@@ -42,6 +42,7 @@ export default function AmtaDevlopment() {
           flexDirection: 'row',
           justifyContent: 'center',
           alignItems: 'center',
+          alignSelf: 'center',
           flexWrap: 'wrap',
         }}>
         {DevlopmentCateories.map((item, index) => (
@@ -100,7 +101,6 @@ const styles = StyleSheet.create({
     elevation: 5,
     justifyContent: 'center',
     alignItems: 'center',
-    flexWrap: 'wrap',
     width: responsiveWidth(40),
   },
   cardHeader: {

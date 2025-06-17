@@ -15,6 +15,7 @@
 		3F5F8AD9B7954C2585BA45C2 /* kalpurush.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 96CC29BD64F3440990A2CA29 /* kalpurush.ttf */; };
 		1FEDF366831E40CFA1DF04BD /* sho.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F5629707A18C498EB72AE9AF /* sho.ttf */; };
 		23EFF4AF980E40FC9882D3F3 /* times.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BC3612CB5D7E478CA59ADA97 /* times.ttf */; };
+		85EDEDEBEA294489A16085FC /* timesbd.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9C9E8B491B824B918B90E1E1 /* timesbd.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +44,7 @@
 		96CC29BD64F3440990A2CA29 /* kalpurush.ttf */ = {isa = PBXFileReference; name = "kalpurush.ttf"; path = "../src/assets/fonts/kalpurush.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		F5629707A18C498EB72AE9AF /* sho.ttf */ = {isa = PBXFileReference; name = "sho.ttf"; path = "../src/assets/fonts/sho.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		BC3612CB5D7E478CA59ADA97 /* times.ttf */ = {isa = PBXFileReference; name = "times.ttf"; path = "../src/assets/fonts/times.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		9C9E8B491B824B918B90E1E1 /* timesbd.ttf */ = {isa = PBXFileReference; name = "timesbd.ttf"; path = "../src/assets/fonts/timesbd.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +134,7 @@
 				96CC29BD64F3440990A2CA29 /* kalpurush.ttf */,
 				F5629707A18C498EB72AE9AF /* sho.ttf */,
 				BC3612CB5D7E478CA59ADA97 /* times.ttf */,
+				9C9E8B491B824B918B90E1E1 /* timesbd.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -210,6 +213,7 @@
 				3F5F8AD9B7954C2585BA45C2 /* kalpurush.ttf in Resources */,
 				1FEDF366831E40CFA1DF04BD /* sho.ttf in Resources */,
 				23EFF4AF980E40FC9882D3F3 /* times.ttf in Resources */,
+				85EDEDEBEA294489A16085FC /* timesbd.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
