@@ -165,7 +165,7 @@ const Splash = () => {
           style={{
             width: chakraSize,
             height: chakraSize,
-            marginTop: -responsiveHeight(8),
+            marginTop: -responsiveHeight(10),
           }}
         />
         <Animated.Image
@@ -174,7 +174,7 @@ const Splash = () => {
             {
               width: responsiveWidth(200),
               position: 'absolute',
-              bottom: -responsiveHeight(23),
+              bottom: -responsiveHeight(22.5),
               transform: [{scale: 0.5}],
             },
             spStyle,
@@ -198,7 +198,6 @@ const styles = StyleSheet.create({
     height: responsiveHeight(100),
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: -responsiveHeight(5),
   },
   starsContainer: {
     position: 'absolute',

@@ -3,7 +3,6 @@ import React, {useEffect} from 'react';
 import AppNavigator from './src/navigation/AppNavigator';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {GlobalContextProvider} from './src/context/Store';
-import {THEME_COLOR} from './src/utils/Colors';
 import Toast from 'react-native-toast-message';
 import {playSound} from './src/utils/voiceUtils';
 import {SafeAreaView} from 'react-native-safe-area-context';
@@ -16,7 +15,7 @@ const App = () => {
     <GlobalContextProvider>
       <SafeAreaView style={{flex: 1}}>
         <View style={{flex: 1, backgroundColor: '#000'}}>
-          <StatusBar backgroundColor={THEME_COLOR} barStyle={'dark-content'} />
+          <StatusBar hidden />
           <GestureHandlerRootView style={{flex: 1}}>
             <KeyboardAvoidingView
               behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
