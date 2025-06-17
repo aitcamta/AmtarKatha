@@ -60,7 +60,7 @@ const Splash = () => {
     );
     starSize.value = withRepeat(
       withSequence(
-        withTiming(3, {duration: 500, easing: Easing.inOut(Easing.ease)}),
+        withTiming(5, {duration: 500, easing: Easing.inOut(Easing.ease)}),
         withTiming(1, {duration: 500, easing: Easing.inOut(Easing.ease)}),
       ),
       -1,
@@ -165,7 +165,7 @@ const Splash = () => {
           style={{
             width: chakraSize,
             height: chakraSize,
-            marginTop: -responsiveHeight(10),
+            marginTop: responsiveHeight(-3),
           }}
         />
         <Animated.Image
@@ -174,7 +174,7 @@ const Splash = () => {
             {
               width: responsiveWidth(200),
               position: 'absolute',
-              bottom: -responsiveHeight(22.5),
+              bottom: -responsiveHeight(27),
               transform: [{scale: 0.5}],
             },
             spStyle,
