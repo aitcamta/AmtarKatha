@@ -16,11 +16,12 @@ import {
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import * as Progress from 'react-native-progress';
 import {downloadFile} from '../modules/downloadFile';
-import {getCollection} from '../context/firestoreHelper';
+import {getCollection} from '../firebase/firestoreHelper';
 import {showToast} from '../modules/Toaster';
+import {useGlobalContext} from '../context/Store';
 
 const ImageSlider = () => {
-  const [sliderData, setSliderData] = useState([]);
+  const {slideState, setSlideState} = useGlobalContext();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [fullscreenImage, setFullscreenImage] = useState(null);
@@ -29,7 +30,12 @@ const ImageSlider = () => {
     const fetchSliderImages = async () => {
       try {
         const data = await getCollection('homeSliderImages');
-        setSliderData(data);
+        const sorted = data.sort((a, b) => {
+          if (a.date > b.date) return -1;
+          if (a.date < b.date) return 1;
+          return 0;
+        });
+        setSlideState(sorted);
         setLoading(false);
       } catch (err) {
         console.error('Error fetching slider images:', err);
@@ -38,7 +44,7 @@ const ImageSlider = () => {
       }
     };
 
-    sliderData.length === 0 && fetchSliderImages();
+    slideState.length === 0 ? fetchSliderImages() : setLoading(false);
   }, []);
 
   const renderItem = ({item, index}) => {
@@ -57,22 +63,6 @@ const ImageSlider = () => {
           />
         </TouchableOpacity>
 
-        {/* Action buttons */}
-        {/* <View style={styles.actionButtons}>
-          <TouchableOpacity
-            style={[styles.actionButton, styles.downloadButton]}
-            onPress={() => downloadFile(item.original, item.fileName)}>
-            <Icon name={'file-download'} size={responsiveWidth(5)} color="white" />
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            style={[styles.actionButton, styles.fullscreenButton]}
-            onPress={() => setFullscreenImage(item.original)}>
-            <Icon name="fullscreen" size={responsiveWidth(5)} color="white" />
-          </TouchableOpacity>
-        </View> */}
-
-        {/* Description */}
         {item.description && (
           <View style={styles.descriptionContainer}>
             <Text
@@ -120,7 +110,7 @@ const ImageSlider = () => {
     );
   }
 
-  if (sliderData.length === 0) {
+  if (slideState.length === 0) {
     return (
       <View style={[styles.center, {height: responsiveHeight(25)}]}>
         <Icon
@@ -138,10 +128,10 @@ const ImageSlider = () => {
       <Carousel
         loop
         width={responsiveWidth(100)}
-        height={responsiveHeight(40)} // Increased height to accommodate descriptions
+        height={responsiveHeight(40)}
         autoPlay={true}
         autoPlayInterval={5000}
-        data={sliderData}
+        data={slideState}
         scrollAnimationDuration={1000}
         renderItem={renderItem}
         panGestureHandlerProps={{
@@ -149,7 +139,6 @@ const ImageSlider = () => {
         }}
       />
 
-      {/* Fullscreen Modal */}
       <Modal
         visible={!!fullscreenImage}
         transparent={false}

@@ -13,6 +13,7 @@ import AdminUploadVideo from '../components/admin/AdminUploadVideo';
 import AdminUserRequests from '../components/admin/AdminUserRequests';
 import AdminPostUpdate from '../components/admin/AdminPostUpdate';
 import AdminUpcommingEvents from '../components/admin/AdminUpcommingEvents';
+import AdminUploadSlides from '../components/admin/AdminUploadSlides';
 
 export default function AdminPanel() {
   const {setActiveTab, adminTab, setAdminTab} = useGlobalContext();
@@ -107,6 +108,16 @@ export default function AdminPanel() {
               setAdminTab(6);
             }}
           />
+          <CustomButton
+            title={'Upload Slide Photos'}
+            color={'chocolate'}
+            size={'medium'}
+            fontSize={responsiveFontSize(1.5)}
+            onClick={() => {
+              setShowButtons(false);
+              setAdminTab(7);
+            }}
+          />
         </View>
       )}
       <View>
@@ -122,6 +133,8 @@ export default function AdminPanel() {
           <AdminPostUpdate />
         ) : adminTab === 6 ? (
           <AdminUpcommingEvents />
+        ) : adminTab === 7 ? (
+          <AdminUploadSlides />
         ) : null}
       </View>
     </ScrollView>

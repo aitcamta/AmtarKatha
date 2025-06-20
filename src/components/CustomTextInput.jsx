@@ -53,7 +53,7 @@ const CustomTextInput = ({
               ? 60
               : 50,
           marginRight: size === 'small' ? 5 : 0,
-          borderColor: isFocused ? THEME_COLOR : '#9e9e9e',
+          borderColor: isFocused ? 'white' : '#9e9e9e',
           borderWidth: isFocused ? 1.5 : 1,
         },
       ]}>
@@ -87,10 +87,10 @@ const CustomTextInput = ({
           numberOfLines={numberOfLines ? numberOfLines : 10}
           textAlignVertical={'top'}
           textAlign="left"
-          placeholderTextColor={isFocused ? 'blueviolet' : THEME_COLOR}
+          placeholderTextColor={isFocused ? 'yellow' : 'orange'}
           maxLength={maxLength ? maxLength : 500000}
           style={{
-            color: 'black',
+            color: 'white',
             backgroundColor: bgcolor
               ? bgcolor
               : !isEditable
@@ -115,7 +115,7 @@ const CustomTextInput = ({
             <Ionicons
               name={isSecure ? 'eye' : 'eye-off'}
               size={responsiveFontSize(2)}
-              color={isSecure ? THEME_COLOR : 'red'}
+              color={isSecure ? 'white' : 'red'}
             />
           </TouchableOpacity>
         )}

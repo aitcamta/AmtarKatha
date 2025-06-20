@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef} from 'react';
 import {
   View,
   StyleSheet,
@@ -21,20 +21,17 @@ import {
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
 import {THEME_COLOR} from '../utils/Colors';
-import Loader from '../components/Loader';
 import EncryptedStorage from 'react-native-encrypted-storage';
 import {useGlobalContext} from '../context/Store';
-// Import your GIF file (adjust the path as needed)
 const achakraGif = require('../assets/images/achakra.gif');
 const SpaulImage = require('../assets/images/spblue_new_nama.png');
 
 const Splash = () => {
   const {setUSER} = useGlobalContext();
+  const navigationOccurred = useRef(false);
   const AnimatedImageBg = Animated.createAnimatedComponent(ImageBackground);
   const {width, height} = Dimensions.get('window');
-  const [loader, setLoader] = useState(false);
   const navigation = useNavigation();
-  // Animation values
   const titleScale = useSharedValue(1);
   const opacity = useSharedValue(0);
   const starOpacity = useSharedValue(0);
@@ -46,7 +43,6 @@ const Splash = () => {
   const bgImage = useSharedValue(0);
   const spImage = useSharedValue(0);
   useEffect(() => {
-    // Main animation sequence
     opacity.value = withTiming(1, {duration: 500});
     bgImage.value = withTiming(1, {duration: 500});
     spImage.value = withTiming(1, {duration: 1200});
@@ -67,7 +63,6 @@ const Splash = () => {
       true,
     );
 
-    // Title pulse animation
     titleScale.value = withRepeat(
       withSequence(
         withTiming(1.05, {duration: 1000}),
@@ -77,16 +72,13 @@ const Splash = () => {
       true,
     );
 
-    // Complete animation after 5 seconds
     setTimeout(() => {
-      // setLoader(true);
       setTimeout(() => {
         chekLogin();
       }, 3000);
     }, 4000);
   }, []);
 
-  // Title animation style
   const titleStyle = useAnimatedStyle(() => {
     return {
       transform: [{scale: titleScale.value}],
@@ -110,6 +102,8 @@ const Splash = () => {
     };
   });
   const chekLogin = async () => {
+    if (navigationOccurred.current) return;
+    navigationOccurred.current = true;
     const nonverifieduid = await EncryptedStorage.getItem('nonverifieduid');
     if (nonverifieduid) {
       const user = JSON.parse(nonverifieduid);
@@ -128,7 +122,6 @@ const Splash = () => {
       <AnimatedImageBg
         source={require('../assets/images/spbg.jpg')}
         style={[styles.bgStyle, bgStyle]}>
-        {/* Sky background with stars */}
         <View style={styles.starsContainer}>
           {Array.from({length: 60}).map((_, i) => (
             <View
@@ -146,7 +139,6 @@ const Splash = () => {
             />
           ))}
         </View>
-        {/* Animated title */}
         <Animated.View style={[styles.titleContainer, titleStyle]}>
           <Text style={[styles.title, {fontSize: titleFontSize}]}>
             {`আমতার`}
@@ -157,9 +149,6 @@ const Splash = () => {
             {`উন্নয়নের পথে নিরবচ্ছিন্ন\n এগিয়ে চলার খতিয়ান`}
           </Text>
         </Animated.View>
-        {/* Waving flag animation */}
-
-        {/* Use Image component for the GIF */}
         <Image
           source={achakraGif}
           style={{
@@ -181,7 +170,6 @@ const Splash = () => {
           ]}
         />
       </AnimatedImageBg>
-      <Loader visible={loader} />
     </View>
   );
 };
